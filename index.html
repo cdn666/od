@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کلینیک دندانپزشکی ارکیدا</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Iranian Sans', Tahoma, Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        .contact-info div {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            height: 80vh;
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .slideshow-slogan {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 20;
+            text-align: center;
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            max-width: 90%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Changed from 'cover' to 'contain' */
+            object-position: center;
+            background-color: white;
+            /* Added white background to prevent transparency issues */
+        }
+
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            user-select: none;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            transform: translateY(-50%);
+        }
+
+        .prev {
+            left: 0;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .slideshow-slogan {
+                font-size: 1em;
+                padding: 10px;
+            }
+        }
+
+        .additional-info {
+            background-color: #e6f2ff;
+            padding: 15px;
+            text-align: right;
+        }
+
+        .additional-info h2,
+        .additional-info h3 {
+            margin-bottom: 10px;
+            color: #1a5f7a;
+        }
+
+
+        .services {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            padding: 15px;
+            background-color: white;
+        }
+
+
+        .service-item {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-item h2 {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #1a5f7a;
+        }
+
+        .map-container {
+            width: 100%;
+            padding: 15px;
+            background-color: #f0f0f0;
+        }
+
+        .map-container h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #1a5f7a;
+        }
+
+        .map-responsive {
+            overflow: hidden;
+            padding-bottom: 56.25%;
+            position: relative;
+            height: 0;
+        }
+
+        .map-responsive iframe {
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
+
+        .kids-section {
+            text-align: center;
+            /* Center the header text */
+            padding: 20px;
+            /* Add padding around the section */
+            background-color: #f9f9f9;
+            /* Light background color for contrast */
+            border: 1px solid #ddd;
+            /* Light border for definition */
+            border-radius: 10px;
+            /* Rounded corners */
+            margin: 20px;
+            /* Margin around the section */
+        }
+
+        .kids-section h2 {
+            font-size: 24px;
+            /* Larger font size for the header */
+            color: #333;
+            /* Darker color for better readability */
+            margin-bottom: 20px;
+            /* Space below the header */
+        }
+
+        .kids-images {
+            display: flex;
+            /* Use flexbox for layout */
+            flex-wrap: wrap;
+            /* Allow images to wrap to the next line */
+            justify-content: center;
+            /* Center images horizontally */
+        }
+
+        .kids-images img {
+            width: 150px;
+            /* Set a fixed width for images */
+            height: auto;
+            /* Maintain aspect ratio */
+            margin: 10px;
+            /* Space between images */
+            border-radius: 5px;
+            /* Slightly rounded corners for images */
+            transition: transform 0.3s;
+            /* Smooth transition for hover effect */
+        }
+
+        .kids-images img:hover {
+            transform: scale(1.05);
+            /* Slightly enlarge image on hover */
+        }
+
+        .service-kids {
+            background-color: #e6f2ff !important;
+        }
+
+        .service-kids h2 {
+            color: #0066cc !important;
+        }
+
+        @media (min-width: 768px) {
+            .contact-info {
+                flex-direction: row;
+            }
+
+            .services {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .kids-section {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contact-info">
+        <div>آدرس: تهران - پیروزی - خیابان چهارم نیروی هوایی - نبش 3/21 - پلاک 2 -واحد 1</div>
+        <div>تلفن: 77750575-021 / 77176529-021</div>
+    </div>
+
+    <div class="slideshow-container">
+        <div class="slide">
+            <img src="img/h1.jpg" alt="Slideshow Image 1">
+        </div>
+        <div class="slide">
+            <img src="img/1.jpg" alt="Slideshow Image 2">
+        </div>
+        <div class="slide">
+            <img src="img/2.jpg" alt="Slideshow Image 3">
+        </div>
+        <div class="slide">
+            <img src="img/3.jpg" alt="Slideshow Image 4">
+        </div>
+    </div>
+
+    <div class="additional-info">
+        <h2>بیمه های طرف قرارداد</h2>
+        <p>مجموعه ارتقاء سلامت (آسپا، البرز، سرمد، پاسارگاد، آرمان)، بانک سپه، بانک رفاه، بیمه دانا، بیمه ما، تعاون،
+            سامان</p>
+
+        <h3>ضمانت یک ساله خدمات</h3>
+        <p>کلیه خدمات دندانپزشکی در این کلینیک تخصصی با ضمانت یکساله انجام می شود.</p>
+
+        <h3>خدمات پیشگیری با 50% تخفیف</h3>
+        <p>به منظور ارتقاء سطح سلامت دهان و دندان جامعه، خدمات پیشگیری با 50% تخفیف انجام می شود.</p>
+
+        <h3>کنترل موارد اورژانس</h3>
+        <p>در این بخش جهت کنترل موارد اورژانس، الکتروشوک، ترالی کد، دستگاه اکسیژن ساز وجود دارد.</p>
+    </div>
+
+    <div class="services">
+        <div class="service-item">
+            <h2><i class="fas fa-tooth"></i> ترمیم و عصب کشی تخصصی</h2>
+            <p>پروتزهای ثابت و متحرک، دست دندانهای متکی بر ایمپلنت، درمان خروپف و دندان قروچه، روکشهای زیرمونیا و IPS
+            </p>
+        </div>
+        <div class="service-item">
+            <h2><i class="fas fa-stethoscope"></i> معاینه رایگان</h2>
+            <p>معاینه و مشاوره رایگان می باشد</p>
+        </div>
+        <div class="service-item">
+            <h2><i class="fas fa-smile"></i> خدمات زیبایی</h2>
+            <p>سفید کردن دندانها، اصلاح خط لبخند، لمینیت کامپوزیتی و پرسنلی، اصلاح بدشکلی و نامرتب بودن دندانها در یک
+                جلسه</p>
+        </div>
+        <div class="service-item">
+            <h2><i class="fas fa-clipboard-list"></i> ارائه طرح درمان</h2>
+            <p>تشخیص بیماریهای دهان و نمونه برداری، تشخیص و درمان بوی بد دهان و درمان مشکلات مفصل گیجگاهی فکی (صدا و
+                درد) توسط متخصص بیماریهای دهان و دندان</p>
+        </div>
+        <div class="service-item">
+            <h2><i class="fas fa-gem"></i> جراحی زیبایی لثه</h2>
+            <p>اصلاح لثه نمایان در هنگام لبخند، سینوس لیفت، پیوند استخوان</p>
+        </div>
+        <div class="service-item">
+            <h2><i class="fas fa-syringe"></i> خدمات تخصصی</h2>
+            <p>پیوند استخوان، پیوند لثه، افزایش طول تاج دندان و فرنکتومی و پالپکتومی، پالپتومی، فلورایدتراپی،
+                فیشورسیلنت، فضانگهدارنده و غیره</p>
+        </div>
+        <div class="service-item">
+            <h2><i class="fas fa-clinic-medical"></i> استریلیزاسیون</h2>
+            <p>**اتاق و پرسنل مجزا جهت استریلیزاسیون** **وسایل و کاور مجزا و توربین و آنگل اختصاصی برای هر بیمار**
+                **استریل محیط درمانی با دستگاه UV**</p>
+        </div>
+        <div class="service-item service-kids">
+            <h2><i class="fas fa-child"></i> دندانپزشکی کودکان</h2>
+            معاینه و درمان تخصصی کودکان - فضای مناسب و دوستانه برای کودکان - پیشگیری و
+            آموزش بهداشت دهان و دندان - درمان های بدون درد و استرس</p>
+        </div>
+        <div class="service-item">
+            <h2><i class="fas fa-camera-retro"></i> تصویربرداری دندانپزشکی</h2>
+            <p>کلینیک ما تصاویر دندان‌ها و نواحی مربوطه را با استفاده از تکنولوژی پیشرفته تهیه می‌کند تا تشخیص دقیق‌تری
+                از مشکلات دندانی شما داشته باشیم.</p>
+        </div>
+    </div>
+
+    <div class="kids-section">
+        <h2>بخش دندانپزشکی کودکان</h2>
+        <div class="kids-images">
+            <img src="img/g4.jpg" alt="Kids Dental 1">
+            <img src="img/g5.jpg" alt="Kids Dental 2">
+            <img src="img/g7.jpg" alt="Kids Dental 3">
+            <img src="img/g9.jpg" alt="Kids Dental 4">
+            <img src="img/g10.jpg" alt="Kids Dental 5">
+            <img src="img/g11.jpg" alt="Kids Dental 6">
+        </div>
+    </div>
+
+    <div class="map-container">
+        <h2>موقعیت مکانی کلینیک دندانپزشکی ارکیدا</h2>
+        <div class="map-responsive">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.1202355135996!2d51.484424375689054!3d35.69325486517737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e03cd9f92f869%3A0x602a652b0caf9d0c!2z2YXYsdmH2YTZhyDZgtin2YbYr9mHINin2YbYr9ix2KfYqiDaryDYp9uM2K_Yp9mG!5e0!3m2!1sfa!2s!4v1701024433090!5m2!1sfa!2s"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.getElementsByClassName('slide');
+
+        function showSlides(n) {
+            // Reset all slides to hidden
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = 'none';
+            }
+
+            // Adjust slide index with wrap-around
+            if (n !== undefined) {
+                slideIndex = n;
+            } else {
+                slideIndex++;
+            }
+
+            // Reset to first slide if we've gone past the end
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            }
+            if (slideIndex < 0) {
+                slideIndex = slides.length - 1;
+            }
+
+            // Show current slide
+            slides[slideIndex].style.display = 'block';
+        }
+
+        // Auto-advance slides every 3 seconds
+        function autoAdvanceSlides() {
+            showSlides();
+            // setTimeout(autoAdvanceSlides, 3000);
+        }
+
+        // Initialize the slideshow when the document loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Create navigation arrows
+            const slideshowContainer = document.querySelector('.slideshow-container');
+
+            // Create slogan element
+            const sloganElement = document.createElement('div');
+            sloganElement.className = 'slideshow-slogan';
+            sloganElement.textContent = 'زندگی بهتر با لبخند زیبا آغاز می شود';
+            slideshowContainer.appendChild(sloganElement);
+
+            const prevArrow = document.createElement('a');
+            prevArrow.className = 'prev';
+            prevArrow.innerHTML = '&#10094;';
+            prevArrow.onclick = () => showSlides(slideIndex - 1);
+
+            const nextArrow = document.createElement('a');
+            nextArrow.className = 'next';
+            nextArrow.innerHTML = '&#10095;';
+            nextArrow.onclick = () => showSlides(slideIndex + 1);
+
+            slideshowContainer.appendChild(prevArrow);
+            slideshowContainer.appendChild(nextArrow);
+
+            // Start auto-advancing from the first slide (img/h1.jpg)
+            showSlides(0);
+            autoAdvanceSlides();
+        });
+    </script>
+</body>
+
+</html>
